@@ -1,0 +1,26 @@
+[workspace]
+members = [
+    "core",
+    "substreams-bitcoin",
+]
+
+[workspace.package]
+version = "0.0.1"
+edition = "2021"
+description = "Substreams development kit for Bitcoin chains, contains Firehose Block model and helpers."
+homepage = "https://substreams.streamingfast.io/"
+repository = "https://github.com/streamingfast/substreams-bitcoin/tree/develop/substreams-bitcoin"
+license = "Apache-2.0"
+readme = "README.md"
+keywords = [ "substreams", "bitcoin", "streamingfast", "firehose", "thegraph"]
+categories = ["api-bindings", "external-ffi-bindings", "wasm"]
+rust-version = "1.60"
+
+[workspace.dependencies]
+substreams-bitcoin = { version = "0.0.1", path = "./substreams-bitcoin" }
+substreams-bitcoin-core = { version = "0.0.1", path = "./core" }
+
+[profile.release]
+lto = true
+opt-level = 's'
+strip = "debuginfo"
