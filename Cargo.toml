@@ -5,7 +5,7 @@ members = [
 ]
 
 [workspace.package]
-version = "1.0.0"
+version = "2.0.0"
 edition = "2021"
 description = "Substreams development kit for Bitcoin chains, contains Firehose Block model and helpers."
 homepage = "https://substreams.streamingfast.io/"
@@ -17,8 +17,8 @@ categories = ["api-bindings", "external-ffi-bindings", "wasm"]
 rust-version = "1.60"
 
 [workspace.dependencies]
-substreams-bitcoin = { version = "1.0.0", path = "./substreams-bitcoin" }
-substreams-bitcoin-core = { version = "1.0.0", path = "./core" }
+substreams-bitcoin = { version = "2.0.0", path = "./substreams-bitcoin" }
+substreams-bitcoin-core = { version = "2.0.0", path = "./core" }
 
 [profile.release]
 lto = true
