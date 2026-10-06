@@ -12,12 +12,9 @@ categories.workspace = true
 rust-version.workspace = true
 
 [dependencies]
-prost = "^0.13.3"
-prost-types = "^0.13.3"
-substreams = "^0.6.0"
-
-[build-dependencies]
-prost-build = "^0.13.3"
+buffa = { version = "0.9", default-features = false, features = ["std", "fast-utf8"] }
+buffa-types = { version = "0.9", default-features = false }
+substreams = "^0.8.0"
 
 [dev-dependencies]
 anyhow = "1"
