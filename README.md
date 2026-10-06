@@ -25,7 +25,7 @@ This means changes to Protobuf files must be manually re-generated and commit, s
 ### Regenerate Rust Firehose Block from Protobuf
 
 ```
-./gen.sh
+buf generate
 ```
 
 If you struggle with something, reach out to us on Discord and we are going to help you out.

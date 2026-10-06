@@ -1,11 +1,12 @@
 [workspace]
+resolver = "2"
 members = [
     "core",
     "substreams-bitcoin",
 ]
 
 [workspace.package]
-version = "2.0.0"
+version = "3.0.0"
 edition = "2021"
 description = "Substreams development kit for Bitcoin chains, contains Firehose Block model and helpers."
 homepage = "https://substreams.streamingfast.io/"
@@ -14,11 +15,11 @@ license = "Apache-2.0"
 readme = "README.md"
 keywords = [ "substreams", "bitcoin", "streamingfast", "firehose", "thegraph"]
 categories = ["api-bindings", "external-ffi-bindings", "wasm"]
-rust-version = "1.60"
+rust-version = "1.83"
 
 [workspace.dependencies]
-substreams-bitcoin = { version = "2.0.0", path = "./substreams-bitcoin" }
-substreams-bitcoin-core = { version = "2.0.0", path = "./core" }
+substreams-bitcoin = { version = "3.0.0", path = "./substreams-bitcoin" }
+substreams-bitcoin-core = { version = "3.0.0", path = "./core" }
 
 [profile.release]
 lto = true
