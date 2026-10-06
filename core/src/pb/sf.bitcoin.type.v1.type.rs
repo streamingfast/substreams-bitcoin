@@ -931,7 +931,6 @@ impl ::buffa::Message for Vin {
     }
 }
 #[derive(Clone, PartialEq, Default)]
-#[allow(non_snake_case)]
 pub struct Vout {
     /// The value in BTC
     ///
@@ -942,7 +941,7 @@ pub struct Vout {
     /// Field 2: `n`
     pub n: u32,
     /// Field 3: `script_pubKey`
-    pub script_pubKey: ::buffa::MessageField<
+    pub script_pub_key: ::buffa::MessageField<
         ScriptPubKey,
         ::buffa::Inline<ScriptPubKey>,
     >,
@@ -952,7 +951,7 @@ impl ::core::fmt::Debug for Vout {
         f.debug_struct("Vout")
             .field("value", &self.value)
             .field("n", &self.n)
-            .field("script_pubKey", &self.script_pubKey)
+            .field("script_pub_key", &self.script_pub_key)
             .finish()
     }
 }
@@ -989,9 +988,9 @@ impl ::buffa::Message for Vout {
         if self.n != 0u32 {
             size += 1u64 + ::buffa::types::uint32_encoded_len(self.n) as u64;
         }
-        if self.script_pubKey.is_set() {
+        if self.script_pub_key.is_set() {
             let __slot = __cache.reserve();
-            let inner_size = self.script_pubKey.compute_size(__cache);
+            let inner_size = self.script_pub_key.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -1012,13 +1011,13 @@ impl ::buffa::Message for Vout {
         if self.n != 0u32 {
             ::buffa::types::put_uint32_field(2u32, self.n, buf);
         }
-        if self.script_pubKey.is_set() {
+        if self.script_pub_key.is_set() {
             ::buffa::types::put_len_delimited_header(
                 3u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.script_pubKey.write_to(__cache, buf);
+            self.script_pub_key.write_to(__cache, buf);
         }
     }
     fn merge_field(
@@ -1052,7 +1051,7 @@ impl ::buffa::Message for Vout {
                     ::buffa::encoding::WireType::LengthDelimited,
                 )?;
                 ::buffa::Message::merge_length_delimited(
-                    self.script_pubKey.get_or_insert_default(),
+                    self.script_pub_key.get_or_insert_default(),
                     buf,
                     ctx,
                 )?;
@@ -1066,7 +1065,7 @@ impl ::buffa::Message for Vout {
     fn clear(&mut self) {
         self.value = 0f64;
         self.n = 0u32;
-        self.script_pubKey = ::buffa::MessageField::none();
+        self.script_pub_key = ::buffa::MessageField::none();
     }
 }
 #[derive(Clone, PartialEq, Default)]

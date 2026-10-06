@@ -1549,7 +1549,6 @@ impl ::buffa::HasMessageView for super::super::Vin {
     type ViewHandle = VinOwnedView;
 }
 #[derive(Clone, Debug, Default)]
-#[allow(non_snake_case)]
 pub struct VoutView<'a> {
     /// The value in BTC
     ///
@@ -1560,7 +1559,7 @@ pub struct VoutView<'a> {
     /// Field 2: `n`
     pub n: u32,
     /// Field 3: `script_pubKey`
-    pub script_pubKey: ::buffa::MessageFieldView<
+    pub script_pub_key: ::buffa::MessageFieldView<
         super::super::__buffa::view::ScriptPubKeyView<'a>,
     >,
 }
@@ -1615,12 +1614,12 @@ impl<'a> ::buffa::MessageView<'a> for VoutView<'a> {
                 )?;
                 let __sub_ctx = ctx.descend()?;
                 let sub = ::buffa::types::borrow_bytes(&mut cur)?;
-                match view.script_pubKey.as_mut() {
+                match view.script_pub_key.as_mut() {
                     Some(existing) => {
                         ::buffa::MessageView::merge_into_view(existing, sub, __sub_ctx)?
                     }
                     None => {
-                        view.script_pubKey = ::buffa::MessageFieldView::set(
+                        view.script_pub_key = ::buffa::MessageFieldView::set(
                             <super::super::__buffa::view::ScriptPubKeyView as ::buffa::MessageView>::decode_view_ctx(
                                 sub,
                                 __sub_ctx,
@@ -1651,7 +1650,7 @@ impl<'a> ::buffa::MessageView<'a> for VoutView<'a> {
         ::core::result::Result::Ok(super::super::Vout {
             value: self.value,
             n: self.n,
-            script_pubKey: match self.script_pubKey.as_option() {
+            script_pub_key: match self.script_pub_key.as_option() {
                 Some(v) => {
                     ::buffa::MessageField::<
                         super::super::ScriptPubKey,
@@ -1676,9 +1675,9 @@ impl<'a> ::buffa::ViewEncode<'a> for VoutView<'a> {
         if self.n != 0u32 {
             size += 1u64 + ::buffa::types::uint32_encoded_len(self.n) as u64;
         }
-        if self.script_pubKey.is_set() {
+        if self.script_pub_key.is_set() {
             let __slot = __cache.reserve();
-            let inner_size = self.script_pubKey.compute_size(__cache);
+            let inner_size = self.script_pub_key.compute_size(__cache);
             __cache.set(__slot, inner_size);
             size
                 += 1u64 + ::buffa::encoding::varint_len(inner_size as u64) as u64
@@ -1700,13 +1699,13 @@ impl<'a> ::buffa::ViewEncode<'a> for VoutView<'a> {
         if self.n != 0u32 {
             ::buffa::types::put_uint32_field(2u32, self.n, buf);
         }
-        if self.script_pubKey.is_set() {
+        if self.script_pub_key.is_set() {
             ::buffa::types::put_len_delimited_header(
                 3u32,
                 u64::from(__cache.consume_next()),
                 buf,
             );
-            self.script_pubKey.write_to(__cache, buf);
+            self.script_pub_key.write_to(__cache, buf);
         }
     }
 }
@@ -1725,7 +1724,6 @@ impl<'a> ::buffa::MessageName for VoutView<'a> {
  Field accessors return borrows tied to `&self`. Use [`Self::view`] to get the full [`VoutView`] when you need struct patterns, iteration helpers, or to pass the view to lifetime-parameterised code.*/
 #[derive(Clone, Debug)]
 pub struct VoutOwnedView(::buffa::OwnedView<VoutView<'static>>);
-#[allow(non_snake_case)]
 impl VoutOwnedView {
     /// Decode an owned view from a [`::buffa::bytes::Bytes`] buffer.
     ///
@@ -1811,10 +1809,10 @@ impl VoutOwnedView {
     }
     /// Field 3: `script_pubKey`
     #[must_use]
-    pub fn script_pubKey(
+    pub fn script_pub_key(
         &self,
     ) -> &::buffa::MessageFieldView<super::super::__buffa::view::ScriptPubKeyView<'_>> {
-        &self.0.reborrow().script_pubKey
+        &self.0.reborrow().script_pub_key
     }
 }
 impl ::core::convert::From<::buffa::OwnedView<VoutView<'static>>> for VoutOwnedView {

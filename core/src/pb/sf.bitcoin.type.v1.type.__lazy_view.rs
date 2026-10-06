@@ -1607,7 +1607,6 @@ impl<'a> ::buffa::MessageName for VinLazyView<'a> {
  let view = VoutLazyView::decode_lazy(&bytes)?;
  ```*/
 #[derive(Clone, Debug, Default)]
-#[allow(non_snake_case)]
 pub struct VoutLazyView<'a> {
     /// The value in BTC
     ///
@@ -1618,12 +1617,11 @@ pub struct VoutLazyView<'a> {
     /// Field 2: `n`
     pub n: u32,
     /// Field 3: `script_pubKey`
-    pub script_pubKey: ::buffa::LazyMessageFieldView<
+    pub script_pub_key: ::buffa::LazyMessageFieldView<
         'a,
         super::super::__buffa::lazy_view::ScriptPubKeyLazyView<'a>,
     >,
 }
-#[allow(non_snake_case)]
 impl<'a> VoutLazyView<'a> {
     /// Decode from `buf` under the limits carried by `ctx`, recording
     /// nested/repeated message fields as byte ranges.
@@ -1677,7 +1675,7 @@ impl<'a> VoutLazyView<'a> {
                     let __sub_ctx = ctx.descend()?;
                     let sub = ::buffa::types::borrow_bytes(&mut cur)?;
                     ctx.register_element_memory(::core::mem::size_of::<&'a [u8]>())?;
-                    view.script_pubKey.push_fragment(sub, __sub_ctx);
+                    view.script_pub_key.push_fragment(sub, __sub_ctx);
                 }
                 _ => {
                     ::buffa::encoding::skip_field_depth(tag, &mut cur, ctx.depth())?;
@@ -1724,7 +1722,7 @@ impl<'a> ::buffa::LazyMessageView<'a> for VoutLazyView<'a> {
         ::core::result::Result::Ok(super::super::Vout {
             value: self.value,
             n: self.n,
-            script_pubKey: match self.script_pubKey.get()? {
+            script_pub_key: match self.script_pub_key.get()? {
                 ::core::option::Option::Some(v) => {
                     ::buffa::MessageField::<
                         super::super::ScriptPubKey,
@@ -1762,7 +1760,7 @@ impl<'a> VoutLazyView<'a> {
         if self.n != 0u32 {
             size += 1u64 + ::buffa::types::uint32_encoded_len(self.n) as u64;
         }
-        for __frag in self.script_pubKey.fragments() {
+        for __frag in self.script_pub_key.fragments() {
             size
                 += 1u64 + ::buffa::encoding::varint_len(__frag.len() as u64) as u64
                     + __frag.len() as u64;
@@ -1788,7 +1786,7 @@ impl<'a> VoutLazyView<'a> {
         if self.n != 0u32 {
             ::buffa::types::put_uint32_field(2u32, self.n, buf);
         }
-        for __frag in self.script_pubKey.fragments() {
+        for __frag in self.script_pub_key.fragments() {
             ::buffa::encoding::Tag::new(
                     3u32,
                     ::buffa::encoding::WireType::LengthDelimited,

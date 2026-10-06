@@ -5,6 +5,7 @@ plugins:
     opt:
       - lazy_views=true
       - unknown_fields=false
+      - idiomatic_field_names=true
 
 inputs:
   - module: buf.build/streamingfast/firehose-bitcoin

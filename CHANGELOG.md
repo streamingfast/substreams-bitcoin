@@ -15,7 +15,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
   The block model's two optional message fields, `Vin::script_sig` and `Vout::script_pub_key`, are
   now `MessageField<T>` rather than `Option<T>`. `MessageField` derefs to a default instance, so
-  `vin.script_sig.asm` reads directly without unwrapping. Every type name is unchanged.
+  `vin.script_sig.asm` reads directly without unwrapping. Every type and field name is unchanged,
+  and the encoded bytes are identical to those `prost` produced.
 
 - The block model is generated from the `buf.build/streamingfast/firehose-bitcoin` module declared in
   `buf.gen.yaml`, so `buf generate` regenerates it and `gen.sh` is removed.
